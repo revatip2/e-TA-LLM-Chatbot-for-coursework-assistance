@@ -1,51 +1,53 @@
-# PDFs Chatbot using Langchain, GPT 3.5 and Llama 2
-This is a Python gui application that demonstrates how to build a custom PDF chatbot using LangChain and GPT 3.5 / Llama 2. 
+# PDFs Chatbot using Langchain, Llama2
+This project allows you to upload PDF documents, process them, and then engage in a conversational interface where you can ask questions about the documents.
 
+## Getting Started
 
-## How it works (GPT 3.5)
+### Install Dependencies
+
+`pip install -r requirements.txt`
+
+1. Download the llama 2 7B GGUF model from https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF/blob/main/llama-2-7b-chat.Q4_K_M.gguf and place it in the models folder
+
+### How it works 
 1. The application gui is built using streamlit
 2. The application reads text from PDF files, splits it into chunks
-3. Uses OpenAI Embedding API to generate embedding vectors used to find the most relevant content to a user's question 
+3. Uses HuggingFaceEmbeddings to generate embedding vectors used to find the most relevant content to a user's question 
 4. Build a conversational retrieval chain using Langchain
-5. Use OpenAI GPT API to generate respond based on content in PDF
+5. Use Llama2 to generate response based on content in PDF
 
-
-## Requirements
-1. Install the following Python packages:
-```
-pip install streamlit pypdf2 langchain python-dotenv faiss-cpu openai sentence_transformers
-```
-
-2. Create a `.env` file in the root directory of the project and add the following environment variables:
-```
-OPENAI_API_KEY= # Your OpenAI API key
-```
-
-
-## Code Structure
+### Code Structure
 
 The code is structured as follows:
 
-- `app.py`: The main application file that defines the Streamlit gui app and the user interface.
-    * get_pdf_text function: reads text from PDF files
-    * get_text_chunks function: splits text into chunks
-    * get_vectorstore function: creates a FAISS vectorstore from text chunks and their embeddings
-    * get_conversation_chain function: creates a retrieval chain from vectorstore
-    * handle_userinput function: generates response from OpenAI GPT API
-- `htmlTemplates.py`: A module that defines HTML templates for the user interface.
+- **utils.py**
+    - Contains utility functions for PDF text extraction and chunking.
+    - Utilizes HuggingFace Transformers to generate embedding vectors from text chunks and creates a vector store using Faiss.
+    - Builds a conversational retrieval chain using Langchain with LlamaCpp model for context generation.
 
+- **app.py**
+    - The main Streamlit application file.
+    - It handles navigation between the upload/process and chat interfaces.
+    - Based on the user's selection from the sidebar menu, the application routes the user to either the "Upload & Process Documents" page or the "Chat" page.
 
-## How to run
-```
-streamlit run app.py
-```
+- **upload_page.py**
+    - Implementation for the upload and processing page.
+    - Allows users to upload PDFs and process them.
 
+- **chat_page.py**
+    - Implementation for the chat interface.
+    - Enables users to interact with the system by asking questions.
+      
+- **htmlTemplates.py**
+    - Contains HTML templates for displaying user and bot messages.
 
-## Update to use Llama 2 running locally
-1. Install Python bindings for llama.cpp library
-```
-pip install llama-cpp-python
-```
-2. Download the llama 2 7B GGML model from https://huggingface.co/TheBloke/LLaMa-7B-GGML/blob/main/llama-7b.ggmlv3.q4_1.bin and place it in the models folder
-3. Switch language model to use Llama 2 loaded by LlamaCpp
-4. Switch embedding model to MiniLM-L6-v2 using HuggingFaceEmbeddings
+## How to Use
+
+1. **Run the Streamlit App**
+ `streamlit run app.py`
+2. **Upload & Process Documents**
+    - This GUI allows the user to upload PDF documents and process them to extract text and create a vector store for conversational retrieval.
+3. **Chat**
+    - Once the documents are processed, there is a different GUI which now allows the user to start asking questions related to the uploaded documents.
+
+Users can switch between the two functionalities using the dropdown menu in the application.
