@@ -29,18 +29,20 @@ css = '''
 
 bot_template = '''
 <div class="chat-message bot">
-    <div class="avatar">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Chatbot_img.png" style="max-height: 78px; max-width: 78px; border-radius: 50%; object-fit: cover;">
-    </div>
+    <div class="avatar"></div>
     <div class="message">{{MSG}}</div>
 </div>
 '''
 
 user_template = '''
 <div class="chat-message user">
-    <div class="avatar">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png">
-    </div>    
+    <div class="avatar"></div>
     <div class="message">{{MSG}}</div>
 </div>
 '''
+
+
+# <div class="avatar">
+#         <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png">
+#     </div> 
+#         <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Chatbot_img.png" style="max-height: 78px; max-width: 78px; border-radius: 50%; object-fit: cover;">
