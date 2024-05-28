@@ -1,4 +1,4 @@
-# PDFs Chatbot using Langchain, Llama2
+# Mulitmodal LLM Chatbot using Langchain, Llama2, RAGs
 This project allows you to upload PDF documents, process them, and then engage in a conversational interface where you can ask questions about the documents.
 
 ## Getting Started
